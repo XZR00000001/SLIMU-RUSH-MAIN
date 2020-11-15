@@ -43,12 +43,6 @@
     ul.nav-tabs.affix{
         top: 30px; /* Set the top position of pinned element */
     }
-    .row .nav > li .dropdown-menu {
-margin: 0;
-}
-.row .nav > li:hover .dropdown-menu {
-display: block;
-}
 </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy">
@@ -59,18 +53,13 @@ display: block;
     <div class="row">
         <div class="col-xs-3" id="myScrollspy">
             <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
-                    <li class="dropdown-menu">
-                        <a href="#">柱状图实例</a>
+                    <li class="active">
+                        <a href="section-1">柱状图实例</a>
                     </li>
-                <ul id="ul1" class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
-                    <li>
-                        <a href="#section-1">柱状图简单实例1</a>
+                    <li class="active">
+                        <a href="section-1">B站全站排行柱状图实例</a>
                     </li>
-                    <li>
-                        <a href="#section-2">B站全站排行柱状图</a>
-                    </li>
-                </ul>
-                
+               
             </ul>
         </div>
         <div class="col-xs-9">
