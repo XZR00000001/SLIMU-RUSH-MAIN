@@ -57,7 +57,7 @@ $(document).ready(function() { 　　
     // 控制全体链接 不跳转
     $("a[id!='online_game']").attr("href", "javascript:void(0);");
     $("a[id!='online_game']").click(function() {
-        alert("馒头骑士提醒您：本链接还在开发当中~");
+        alert("馒头骑士提醒您：本链接还在开发当中~ ");
     });
     $("#online_game").attr("href", "./game_set/SLIMU RUSH.html");
 
