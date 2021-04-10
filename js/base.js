@@ -59,7 +59,7 @@ $(document).ready(function() { 　　
     $("a[id!='online_game']").click(function() {
         alert("馒头骑士提醒您：本链接还在开发当中~");
     });
-    $("#online_game").attr("href", "./game_set/slimu_rush2.html");
+    $("#online_game").attr("href", "./game_set/SLIMU RUSH.html");
 
 
     // 背景音乐样式动态改变
