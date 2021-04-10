@@ -1,0 +1,99 @@
+1.浏览器名称 
+
+    //IE : "Microsoft Internet Explorer" 
+
+    //NS : "Netscape" 
+
+    var browserName = navigator.appName;
+
+    2.浏览器版本 
+
+    var browserVersion = navigator.appVersion;
+
+    3.客户端操作系统 
+
+    var isWin = ( navigator.userAgent.indexOf("Win") != -1 ); 
+
+    var isMac = ( navigator.userAgent.indexOf("Mac") != -1 ); 
+
+    var isUnix = ( navigator.userAgent.indexOf("X11") != -1 );
+
+    4.判断是否支持某对象,方法,属性 
+
+    //当一个对象,方法,属性未定义时会返回undefined或null等,这些特殊值都是false 
+
+    if( document.images ){ } 
+
+    if( document.getElementById ){ }
+
+    5.检查浏览器当前语言 
+
+    if( navigator.userLanguage ){ 
+
+        var l = navigator.userLanguage.toUpperCase(); 
+
+    } 
+
+    6.检查浏览器是否支持Cookies 
+
+    if( navigator.cookieEnabled ){ }
+
+    7.控制浏览器窗口( window ) 
+
+    （1.设置浏览器的大小 
+
+    window.resizeTo(800, 600); //将浏览器调整到800X600大小 
+
+    window.resizeBy(50, -10); //在原有大小上改变增大或减小窗口大小
+
+    （2.调整浏览器的位置 
+
+    window.moveTo(10, 20); //将浏览器的位置定位到X:10 Y:20 
+
+    window.moveBy(0, 10); //在原有位置上移动位置(偏移量)
+
+    （3.创建一个新的窗口 
+
+    var win = window.open("about.htm","winName","height=300,width=400");
+
+    //参数 
+
+    alwaysLowered //始终在其它浏览器窗口的后面(NN) 
+
+    alwaysRaised //始终在其它浏览器窗口的前面(NN) 
+
+    channelMode //是否为导航模式(IE) 
+
+    copyhistory //复制历史记录至新开的窗口(NN) 
+
+    dependent //新窗口随打开它的主窗口关闭而关闭(NN) 
+
+    fullscreen //全屏模式(所有相关的工具栏都没有)(IE) 
+
+    location //是否显示地址栏(NN,IE) 
+
+    menubar //是否显示菜单栏(NN,IE) 
+
+    scrollbars //是否显示滚动条(NN,IE) 
+
+    status //是否显示状态栏(NN,IE) 
+
+    toolbar //是否显示工具栏(NN,IE) 
+
+    directories //是否显示链接栏(NN,IE) 
+
+    titlebar //是否显示标题栏(NN) 
+
+    hotkeys //显示菜单快捷键(NN) 
+
+    innerHeight //内容区域的高度(NN) 
+
+    innerWidth //内容区域的宽度(NN) 
+
+    resizable //是否可以调整大小(NN,IE) 
+
+    top //窗口距离桌面上边界的大小(NN,IE) 
+
+    left //窗口距离桌面左边界的大小(NN,IE) 
+
+    height //窗口高度(NN,IE) ·字符串(String) 

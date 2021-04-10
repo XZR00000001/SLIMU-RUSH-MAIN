@@ -1,0 +1,340 @@
+1.CSS书写顺序
+        1.布局定位属性 display / position / float / clear / visibility / overflow (建议 display 第一个写，关系到模式)
+        2.自身属性 width / height / margin/ padding / border / background
+        3.文本属性 color / font / text-decoration / text-align / vertical-align / white-space / break-word
+        4.其他属性（CSS3）: content / cursor / border-radius / box-shadow / text-shadow / background:linear-gradient...
+
+        布局定位， 自身，文本，其他
+
+2.页面布局整体思路
+        1.必须确定页面的版心(可视区)，我们测量可得知
+        2.分析页面中的行模块，以及每个行模块中的列模块，也是页面布局第一准则
+        3.一行中的列模块经常浮动布局，先确定每个列的大小，之后确定列的位置，页面的第二准则
+        4.制作HTML结构，我们还是遵循，先有结构，后有样式的原则。结构永远最重要
+        5.所以，先理清楚 布局结构， 再写代码尤为重要，这需要我们多写多积累。
+
+3.nav头部导航制作
+
+        实际开发中，我们不会直接使用链接啊而是使用li包含链接的做法 （li+a）
+
+        1. li+a 语义更清晰，一看就是有条理的列表型内容。
+        2.如果直接使用a，搜索引擎容易辨别为有 堆砌关键字 嫌疑（故意堆砌关键字容易被搜索引擎有降权的风险从而影响网站排名）
+
+4.行内块元素之间默认是有缝隙的= =  除非你float.~  浮动的盒子没有外边距合并的问题
+
+5.shift + alt按键。 按住左键拖。  可以选中多个要修改的行. 可以先中间打个空格搞出提示
+
+6.最自由的方式----定位。  可以压着盒子然后自由动. 定位模式+边偏移
+
+7.想让一个图标定位在其上一个图片上， 就要让父元素设置相对位置。然后里面的元素就可以自由移动了
+
+8.定位详解：
+                静态定位：没有边偏移。 标准流就是这么搞的~
+                相对定位：以自身原来位置为基点。移动。 应用一：给绝对定位当爹0.0~ 主要是限制别人的定位
+                绝对定位：移动的时候是根据其父元素来的。如果没有父元素或者父元素没定位则按文档页面来~. （这个方式不占有原先的位置！！！）
+                固定定位：固定在浏览器里的位置。以浏览器的框为定位标准。
+
+                粘性定位：适用于先固定在某一位置。 在浏览器缩放或进行一定操作后再跟着浏览器移动的情况.占有原有位置. 必须添加top，bottom，right，left中的一个才能生效
+
+                如果父元素已经设置了定位（相对，绝对，固定定位） ，则按最近一级的有定位的父元素为参考移动位置。
+
+                简而言之就是  子绝父相
+
+
+9.板块边的小图标。 先使用fixed模式。left:50%。 然后margin-left设置背版的一般宽
+
+10.定位规则 z-index 数值越大 就在顶部。
+
+11.定位中的小技巧
+
+        绝对定位的元素水平居中： 1.left:50% 2.margin走自己盒子宽度的一半（负值） 
+        绝对定位的元素竖直居中:  1.top:50%  2.margin自己盒子高度的一半（负数）
+
+        行内元素添加绝对定位或固定定位可以直接设置宽高！！！
+        浮动元素只压盒子，不压里面的文字和图片！！ 因为浮动刚开始的时候是为了让文字环绕一个区域盒子。
+
+12.显示与隐藏 
+        display 显示与隐藏  隐藏后不占原来的位置
+        visibiliy 显示与隐藏 隐藏后占有原来位置
+        overflow 溢出隐藏（重点）！！！  
+                使用scroll可以让溢出的部分可以滚动查看
+                auto 会在需要的时候加上
+                hidden就超出的看不到
+                用了定位的时候小心使用！！  怕把其他的也隐藏了
+
+13.CSS高级技巧
+
+                sprites精灵图  参考rpgmaker精灵图  哈哈哈！！！   操纵background-position移动就好了。 然后按区域切
+
+                iconfont字体图标~   显示是图标其实是文字。  可以修改大小颜色等  不错
+
+                经典小三角CSS写法：
+                                        width: 0;
+                                        height: 0;
+                                        line-height: 0;
+                                        font-size: 0;
+                                        border: 10px solid transparent;
+                                        border-left-color: blue;
+
+14. 界面样式
+                更改用户的鼠标样式  cursor
+                表单轮廓 outline
+                防止表单域拖拽。 resize:none;
+
+15.vertical-align 垂直居中属性。常用于设置图片或表单（行内块元素） 和 文字垂直对齐
+
+        vertical-align: baseline | top | middle | bottom
+
+16.文本溢出显示省略号
+
+        单行
+
+                1.先强制显示一行文本
+                        white-space: nowrap;
+                2.超出部分隐藏
+                        overflow:hidden;
+                3.文字用省略号替代超出的部分
+                        text-overflow:ellipsis;
+        
+        多行
+                1.overflow:hidden;
+                2.text-overflow:ellipsis;
+
+                /* 弹性伸缩盒子模型显示 */
+                3.display: -webkit-box;
+                /* 限制在一个块元素显示的文本行数 */
+                4.-webkit-line-clamp:2;
+                /* 设置或检索伸缩盒子对象的子元素的排列方式 */
+                5.-webkit-box-orient: vertical;
+
+17.布局技巧积累
+                1.margin负值的运用  边框线宽了 直接margin负值往里面挤= =  然后选中的时候用相对定位突出出来。如果已有定位加上z-index凸显出来~
+                2.文字围绕浮动元素  如果是设置一个图片或其他的块元素与一段文字接收的区域的时候。可以使用float的块元素+p来完成。记住给最大的盒子设padding。这样下面才能检测.
+                3.行内块元素的巧妙运用 可以用于做页面选择的框。  text-align。 然后子元素每个设置inline-block。然后设置样式即可
+                4.CSS三角强化 
+
+18.CSS精通教程
+
+	1.页面内的所有元素其实都可以显示的只不过标准下是隐藏头信息的。 可以通过css让head等显示为block即可！！！
+
+	2.可以使用contenteditable，让段落等文本类的标签甚至是一部分style变为可编辑的。并且对于适用的css中有很多个的情况下。可以使用数学公式让指定个或有规律的适用。比如（3n+4） 可以让从第四个开始每隔三个改变样式。
+
+	3.滚动条（弹幕） 
+
+    <marquee behavior="alternate">
+        <font color="mediumvioletred" size="20">北京第三交通委提醒你</font>
+    </marquee>
+    <marquee behavior="scroll">
+        <font color="mediumvioletred" size="20">北京第三交通委提醒你</font>
+    </marquee>
+    <marquee behavior="slide">
+        <font color="mediumvioletred" size="20">北京第三交通委提醒你</font>
+    </marquee>
+
+	4.背景滚动。时尚经典滚动上下显示背景
+
+		background-attachment: fixed;  锁定然后滚就完了= =  然后设置遮挡div的上下z-index
+
+	5.导入图片的时候可以直接指定在一个div里的相对位置 比如  left bottom / box-shadow 可以设置多层阴影围绕 / gradient渐变(在里面可以设置各种形状颜色等)
+
+	6.对于图卡类型的网页。 滚动的 可以使用grid栈排布。  使用justify-content设置排列方式，然后用代码实现滑动等效果
+	
+19.HTML5 新标签
+
+        hearder 头部标签
+        nav 导航标签
+        article 内容标签
+        section 定义文档某个区域
+        aside 侧边栏
+        footer 尾部标签
+
+        #注意  在IE9里面要转换成 display:block
+
+        audio
+        vedio
+
+        input标签：
+                type="email url date time month week number(数字类型) tel(手机号) search(搜索框) color(颜色选择表单)"
+
+        form标签：
+                required 表示不能为空
+                placeholder 提示文本
+                autofucus 自动聚焦
+                autocomplete 基于之前键入的值显示该字段填写项 默认是打开的
+                multiple 可多选文件提交
+
+20.CSS3 新特性 伪类选择器要使用::了  以前的:只是兼容ie8/  ::before ::after
+
+        修改已设置的属性，  比如input[value]:{}
+
+                        E[att="val"] 选择属性且属性值等于val的E元素
+                        E[att^="val"] 具有属性且值以val开头的E元素
+                        E[att$="val"] 具有属性且值以val结尾的E元素
+                        E[att*="val"] 具有属性且含有val的E元素
+        结构伪类选择器：
+                        E:first-child 匹配第一个子元素E
+                        E:last-child 匹配最后一个元素
+                        E:nth-child(2n+1) 匹配第2n+1个元素。有顺序的选择  even偶数 odd奇数  。 执行的时候是先取相应的孩子，然后看前面的元素是否一致
+                        E:first-of-type 指定类型E的第一个
+                        E:last-of-type 指定类型E的最后一个
+                        E：nth-of-type(2n+1) 指定类型E的第2n+1个。 有顺序的选择 even偶数 odd奇数 .执行的时候是先取相应的孩子，然后看前面的元素是否一致
+        使用字体图标（去icomoon下~）：
+
+                在::after  ::before 里用 font-family 设定字体集。 然后content打个框。。。 自己选图标啦~
+
+        .clearfix:after{
+                content:""; 伪元素必须写
+                display:block; 插入的元素必须是块级
+                height:0; 不要看见这个元素
+                clear:both;
+                visibility:hidden; 
+        }
+
+        盒子模型
+                1.box-sizing:content-box 盒子大小为width + padding + border
+                2.box-sizing:border-box 盒子大小为width   padding和border不会撑大盒子了！ 前提是padding和border不会超过width
+
+        其他特性：
+                1.滤镜 filter  去MDN搜方法~
+                2.
+        
+
+
+21.js页面刷新读取顺序
+
+<script type='text/javascript'> 
+　　window.onload = function(){ 
+　　　　alert("window_html loaded====》onload"); 
+　　} 
+
+　　$(window).load(function(){ 
+　　　　alert("jquery===》window_html loaded" ); 
+　　}) 
+
+　　$(document).ready(function () { 
+　　　　alert("jquery====》document loaded"); 
+　　}); 
+
+　　$(function(){ 
+　　　　alert("jquery====》document onload"); 
+　　}); 
+
+　　function executeAfterloadedBody(){ 
+　　　　alert("====》onload"); 
+　　}
+
+</script> 
+<body οnlοad="executeAfterloadedBody()">  #这个是最后的
+</body> 
+
+22.chrome://flags/#autoplay-policy 可修改浏览器用户权限设置
+
+23.可以通过设置Timer的方法来动态显示一些东西
+
+         timer=setInterval(function(){
+                 //设置你要改变的东西
+         });
+------------------------------HTML5函数库underscore------------------------------
+
+1.underscore函数库算法之王 与 js中操作DOM结构的jquery一样非常重要。可以实现各种效果
+
+2.underscore 使用 _.函数方法  调用。  
+        比如 console.log(_.random(-40,40)); 随机生成一个-40到40间的整数
+
+        _.max(); 求一个数组里的最大值
+        _.min(); 求一个数组里的最小值
+        _.uniq(); 去除一个数组中的重复元素
+
+        对于一个json数据可以使用：
+                _.keys(); 看键值
+                _.values(); 看数值
+
+
+
+-------------------------------jqueryUI--------------------------------------------
+
+tips: 查看一个网页的jquery版本在控制台使用  $.fn.jquery.  一般网页上是使用 1.9~1.11版本。  移动端是3.x版本
+
+1.jqueryUI是依赖于jQuery的。它是一个界面代码库  它主要是实现一些前端中的效果。已经封装好了
+
+
+----------------------------------js中的鼠标事件大全----------------------------------------------
+
+输入到判断的时候，把on去掉。有on的是在标签里直接加的时候。然后再去往上调用函数的
+
+一般事件 事件 浏览器支持 描述
+onClick IE3|N2|O3 鼠标点击事件，多用在某个对象控制的范围内的鼠标点击
+onDblClick IE4|N4|O 鼠标双击事件
+onMouseDown IE4|N4|O 鼠标上的按钮被按下了
+onMouseUp IE4|N4|O 鼠标按下后，松开时激发的事件
+onMouseOver IE3|N2|O3 当鼠标移动到某对象范围的上方时触发的事件
+onMouseMove IE4|N4|O 鼠标移动时触发的事件
+onMouseOut IE4|N3|O3 当鼠标离开某对象范围时触发的事件
+onKeyPress IE4|N4|O 当键盘上的某个键被按下并且释放时触发的事件.[注意:页面内必须有被聚焦的对象]
+onKeyDown IE4|N4|O 当键盘上某个按键被按下时触发的事件[注意:页面内必须有被聚焦的对象]
+onKeyUp IE4|N4|O 当键盘上某个按键被按放开时触发的事件[注意:页面内必须有被聚焦的对象]
+页面相关事件 事件 浏览器支持 描述
+onAbort IE4|N3|O 图片在下载时被用户中断
+onBeforeUnload IE4|N|O 当前页面的内容将要被改变时触发的事件
+onError IE4|N3|O 捕抓当前页面因为某种原因而出现的错误，如脚本错误与外部数据引用的错误
+onLoad IE3|N2|O3 页面内空完成传送到浏览器时触发的事件，包括外部文件引入完成
+onMove IE|N4|O 浏览器的窗口被移动时触发的事件
+onResize IE4|N4|O 当浏览器的窗口大小被改变时触发的事件
+onScroll IE4|N|O 浏览器的滚动条位置发生变化时触发的事件
+onStop IE5|N|O 浏览器的停止按钮被按下时触发的事件或者正在下载的文件被中断
+onUnload IE3|N2|O3 当前页面将被改变时触发的事件
+表单相关事件 事件 浏览器支持 描述
+onBlur IE3|N2|O3 当前元素失去焦点时触发的事件 [鼠标与键盘的触发均可]
+onChange IE3|N2|O3 当前元素失去焦点并且元素的内容发生改变而触发的事件 [鼠标与键盘的触发均可]
+onFocus IE3|N2|O3 当某个元素获得焦点时触发的事件
+onReset IE4|N3|O3 当表单中RESET的属性被激发时触发的事件
+onSubmit IE3|N2|O3 一个表单被递交时触发的事件
+滚动字幕事件 事件 浏览器支持 描述
+onBounce IE4|N|O 在Marquee内的内容移动至Marquee显示范围之外时触发的事件
+onFinish IE4|N|O 当Marquee元素完成需要显示的内容后触发的事件
+onStart IE4|N|O 当Marquee元素开始显示内容时触发的事件
+编辑事件 事件 浏览器支持 描述
+onBeforeCopy IE5|N|O 当页面当前的被选择内容将要复制到浏览者系统的剪贴板前触发的事件
+onBeforeCut IE5|N|O 当页面中的一部分或者全部的内容将被移离当前页面[剪贴]并移动到浏览者的系统剪贴板时触发的事件
+onBeforeEditFocus IE5|N|O 当前元素将要进入编辑状态
+onBeforePaste IE5|N|O 内容将要从浏览者的系统剪贴板传送[粘贴]到页面中时触发的事件
+onBeforeUpdate IE5|N|O 当浏览者粘贴系统剪贴板中的内容时通知目标对象
+onContextMenu IE5|N|O 当浏览者按下鼠标右键出现菜单时或者通过键盘的按键触发页面菜单时触发的事件 [试试在页面中的<body>中加入onContentMenu="return false"就可禁止使用鼠标右键了]
+onCopy IE5|N|O 当页面当前的被选择内容被复制后触发的事件
+onCut IE5|N|O 当页面当前的被选择内容被剪切时触发的事件
+onDrag IE5|N|O 当某个对象被拖动时触发的事件 [活动事件]
+onDragDrop IE|N4|O 一个外部对象被鼠标拖进当前窗口或者帧
+onDragEnd IE5|N|O 当鼠标拖动结束时触发的事件，即鼠标的按钮被释放了
+onDragEnter IE5|N|O 当对象被鼠标拖动的对象进入其容器范围内时触发的事件
+onDragLeave IE5|N|O 当对象被鼠标拖动的对象离开其容器范围内时触发的事件
+onDragOver IE5|N|O 当某被拖动的对象在另一对象容器范围内拖动时触发的事件
+onDragStart IE4|N|O 当某对象将被拖动时触发的事件
+onDrop IE5|N|O 在一个拖动过程中，释放鼠标键时触发的事件
+onLoseCapture IE5|N|O 当元素失去鼠标移动所形成的选择焦点时触发的事件
+onPaste IE5|N|O 当内容被粘贴时触发的事件
+onSelect IE4|N|O 当文本内容被选择时的事件
+onSelectStart IE4|N|O 当文本内容选择将开始发生时触发的事件
+数据绑定 事件 浏览器支持 描述
+onAfterUpdate IE4|N|O 当数据完成由数据源到对象的传送时触发的事件
+onCellChange IE5|N|O 当数据来源发生变化时
+onDataAvailable IE4|N|O 当数据接收完成时触发事件
+onDatasetChanged IE4|N|O 数据在数据源发生变化时触发的事件
+onDatasetComplete IE4|N|O 当来子数据源的全部有效数据读取完毕时触发的事件
+onErrorUpdate IE4|N|O 当使用onBeforeUpdate事件触发取消了数据传送时，代替onAfterUpdate事件
+onRowEnter IE5|N|O 当前数据源的数据发生变化并且有新的有效数据时触发的事件
+onRowExit IE5|N|O 当前数据源的数据将要发生变化时触发的事件
+onRowsDelete IE5|N|O 当前数据记录将被删除时触发的事件
+onRowsInserted IE5|N|O 当前数据源将要插入新数据记录时触发的事件
+数据绑定 事件 浏览器支持 描述
+onAfterPrint IE5|N|O 当文档被打印后触发的事件
+onBeforePrint IE5|N|O 当文档即将打印时触发的事件
+onFilterChange IE4|N|O 当某个对象的滤镜效果发生变化时触发的事件
+onHelp IE4|N|O 当浏览者按下F1或者浏览器的帮助选择时触发的事件
+onPropertyChange IE5|N|O 当对象的属性之一发生变化时触发的事件
+onReadyStateChange IE4|N|O 当对象的初始化属性值发生变化时触发的事件
+
+小目标： 用已学的知识给游戏做一个像素风主页, 形成一套自己的解决方案
+
+
+
+

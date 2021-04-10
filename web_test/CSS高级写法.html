@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS高级写法</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei';
+        }
+        
+        .box-set {
+            position: relative;
+            width: 200px;
+            height: 42px;
+            background-color: pink;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        
+        .box-set:hover {
+            transition: 0.5s ease-in-out;
+            height: 300px;
+        }
+        
+        .box-set .content-set {
+            /* 根据父盒子的高度来变化即可！！！ */
+            margin: 10px;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .box-set .content-set p {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 1px;
+            text-align: center;
+        }
+        
+        .box-set:not(:hover) {
+            /* 没有悬浮在上面的时候 */
+            transition: 0.5s ease-in-out;
+        }
+        
+        .box-set .icon-set {
+            /* 小三角样式 */
+            position: absolute;
+            top: 10px;
+            right: -18px;
+            width: 0;
+            height: 0;
+            line-height: 0;
+            font-size: 0;
+            border: 10px solid transparent;
+            border-left-color: pink;
+        }
+        
+        .page-change a {
+            margin-top: 10px;
+            width: 36px;
+            height: 36px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            line-height: 36px;
+            text-align: center;
+            display: inline-block;
+            color: black;
+            text-decoration: none;
+        }
+        
+        .page-change .prev,
+        .page-change .next {
+            width: 85px;
+        }
+        
+        .page-change .current,
+        .page-change .elp {
+            background-color: #fff;
+            border: none;
+        }
+        
+        .page-change input {
+            height: 36px;
+            width: 45px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        
+        .page-change button {
+            height: 36px;
+            width: 60px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+        }
+        
+        .angle-set {
+            width: 160px;
+            border: 2px solid pink;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .angle-set .price {
+            width: 160px;
+            height: 24px;
+            line-height: 24px;
+            margin: 0 auto;
+            float: left;
+        }
+        
+        .angle-set .price .miaosha {
+            position: relative;
+            float: left;
+            width: 90px;
+            height: 100%;
+            background-color: red;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .angle-set .price .miaosha i {
+            position: absolute;
+            float: left;
+            height: 0;
+            width: 0;
+            right: 0;
+            border-top: 50px solid transparent;
+            border-right: 50px solid #fff;
+            border-style: solid;
+            border-width: 24px 10px 0 0;
+        }
+        
+        .angle-set .price .yuanjia {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: rgb(206, 204, 204);
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 触发式自动拉伸对话框 -->
+    <div class="box-set">
+        <div class="content-set">
+            <p>我是一个对话框，小三角靠CSS写的具体内容如下我是一个对话框，小三角靠CSS写的具体内容如下我是一个对话框，小三角靠CSS写的具体内容如下我是一个对话框，小三角靠CSS写的具体内容如下</p>
+        </div>
+        <div class="icon-set"></div>
+    </div>
+    <!-- 换页栏 -->
+    <div class="page-change">
+        <a href="" class="prev">&lt;&lt;上一页</a>
+        <a href="" class="current">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+        <a href="" class="elp">...</a>
+        <a href="" class="next">下一页&gt;&gt;</a> 到第
+        <input type="text"> 页
+        <button>确定</button>
+    </div>
+    <!-- 三角强化 -->
+    <div class="angle-set">
+        <div class="price">
+            <span class="miaosha">5999元<i></i></span>
+            <span class="yuanjia">99999元</span>
+        </div>
+    </div>
+
+    <marquee behavior="scroll" scrollamount="10" direction="left">
+        <p color="mediumvioletred" size="15">特价优惠进行中。。。</p>
+    </marquee>
+
+
+
+</body>
+
+</html>

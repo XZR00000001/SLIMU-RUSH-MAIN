@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .mask {
+            width: 192px;
+            height: 150px;
+            position: relative;
+        }
+        
+        .mask .mainimg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        
+        .mask .subimg {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        
+        .mask .buy-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            line-height: 150px;
+        }
+        
+        .mask .buy-img {
+            display: none;
+        }
+        
+        .mask .buy-img:hover {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mask">
+        <img src="./img/pic.png" alt="" class="mainimg">
+        <img src="./img/user.png" alt="" class="subimg">
+        <div class="buy-img"><img src="./img/buy-img.png" alt=""></div>
+    </div>
+</body>
+
+</html>

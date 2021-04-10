@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- 一定要先加载jquery 把插件的顺序搞好= = -->
+    <script type="text/javascript">
+        var last_page = document.html;　
+        var animate_now = false;
+        // ready - function() - load - onload
+        // 直接隐藏 $('*').hide();
+
+
+
+        $(document).ready(function() { 　　
+            // 准备中　
+
+            // 控制全体链接 不跳转
+            $("a").attr("href", "javascript:void(0);");
+
+            $("a").click(function() {
+                alert("馒头骑士提醒您：", "本链接还在开发当中~");
+            });
+
+            // 背景音乐样式动态改变
+            $("#bg_music").mouseenter(function() {
+                // 先初始化状态 因为css总是在动态刷新其原有css样式.
+                $("#bg_audio").css("opacity", "0");
+                $("#bg_audio").stop().animate({
+                    opacity: "1"
+                }, speed = "slow", easing = "swing");
+
+
+            });
+
+            $("#bg_music").mouseleave(function() {
+                $("#bg_audio").stop().animate({
+                    opacity: "0"
+                }, speed = "slow", easing = "swing");
+            });
+
+
+        });
+
+        $(function() { 　　　
+            //执行的一般函数　
+            　　});
+
+        $(window).load(function() { 　
+            // 加载中　　　
+            　});
+
+
+        function animate_reloads() {
+
+            if (animate_now == false) {
+                // 动画开关器= =  低制作力
+                $("#image_set").stop().animate({
+                    height: "+=8px",
+                    width: "+=8px",
+                }, 200, easing = "swing", function() {
+                    $("#image_set").css("background-color", "gold");
+                    animate_now = true;
+                    animate_reloads();
+                });
+            } else {
+                $("#image_set").stop().animate({
+                    height: "-=8px",
+                    width: "-=8px",
+                }, 200, easing = "swing", function() {
+                    $("#image_set").css("background-color", "skyblue");
+                    animate_now = false;
+                    animate_reloads();
+                });
+            }
+        }
+
+
+        // 对于一些函数 需要在body中才能执行。所以要onload方法加载
+
+        window.onload = function() {
+            // 加载中 如果onload有指定其他函数则不执行
+
+            // listener永远的神
+            var audioplayer = document.querySelector('audio#bg_audio');
+            audioplayer.addEventListener('play', function() {
+                console.log("正在播放");
+                animate_reloads();
+            });
+            audioplayer.addEventListener('pause', function() {
+                console.log("停止了");
+                $("#image_set").animate().stop();
+                // 重置大小
+                $("#image_set").css({
+                    "height": "50px",
+                    "width": "50px",
+                    "background-color": "rgba(0, 0, 0, 0)"
+                });
+            });
+
+            // 点击前往顶部
+            var upper_set = document.querySelector('img#upper_img');
+            upper_set.addEventListener('click', function() {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 'normal');
+            });
+
+        }
+    </script>
+
+</head>
+
+<body>
+    </script>
+    <!-- 头部区域 -->
+    <div class="header w">
+        <!-- logo部分 -->
+        <div class="logo" id="logo_set">
+            <img src="./img/logo2.png ">
+        </div>
+
+
+        <!-- 导航 -->
+        <div class="nav ">
+            <ul>
+                <li>
+                    <a href=" ">首页</a>
+                </li>
+                <li>
+                    <a href=" ">下载游戏</a>
+                </li>
+                <li>
+                    <a href=" ">游戏设定</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 搜索模块 -->
+        <div class="search ">
+            <input type="text " placeholder="输入关键字 ">
+            <button></button>
+        </div>
+
+        <!-- 用户模块 -->
+        <div class="user ">
+            <img src="img/user.png ">
+            <span>馒头骑士</span>
+        </div>
+    </div>
+    <!-- banner区域 -->
+    <div class="banner ">
+        <!-- 板心 -->
+        <div class="w ">
+            <video preload="auto" src="./video/slimu_rush_0.mp4 " class="back-video " autoplay loop controls></video>
+            <div class="nav-left ">
+                <ul>
+                    <li><a href=" ">SLIMU RUSH V1.01<span>&gt;</span></a></li>
+                    <li><a href=" ">BOSS攻略 全解<span>&gt;</span></a></li>
+                    <li><a href=" ">游戏全章节剧情简介<span>&gt;</span></a></li>
+                    <li><a href=" ">SLIMU 可以换装啦！<span>&gt;</span></a></li>
+                    <li><a href=" ">强敌降临！RT-7X登场<span>&gt;</span></a></li>
+                    <li><a href=" ">节日副本 正是踏青时<span>&gt;</span></a></li>
+                    <li><a href=" ">空间站系统开放！<span>&gt;</span></a></li>
+                    <li><a href=" ">联机模式最新优化！<span>&gt;</span></a></li>
+                    <li><a href=" ">支线剧情全解<span>&gt;</span></a></li>
+                </ul>
+            </div>
+
+            <!-- 下边导览栏 -->
+            <div class="scroll-img ">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- 右边广告 -->
+            <div class="nav-right ">
+                <h2>最新公告</h2>
+                <div class="adv ">
+                    <ul>
+                        <li>
+                            <a href=" ">【优惠特价】</a>
+                            <p>slimu rush历低价88元,请登陆...</p>
+                        </li>
+                        <li>
+                            <a href=" ">【全体团购】</a>
+                            <p>详细内容...</p>
+                        </li>
+                        <li>
+                            <a href=" ">【特色活动】</a>
+                            <p>详细内容...</p>
+                        </li>
+                        <a href=" " class="more ">更多公告</a>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="upper ">
+        <img src="./img/airo.png " alt=" " id="upper_img">
+    </div>
+
+    <!-- 推荐区域 -->
+    <div class="goods w ">
+        <h3>游戏推荐</h3>
+        <ul>
+            <li><a href=" ">SLIMU RUSH</a></li>
+            <li><a href=" ">SLIMU RUSH 皇家版</a></li>
+            <li><a href=" ">SLIMU 太空物语</a></li>
+            <li><a href=" ">SLIMU 末世危机</a></li>
+            <li><a href=" ">SLIMU 重生勇者</a></li>
+        </ul>
+        <a href=" " class="mod ">查看更多</a>
+    </div>
+    <!-- 商品列表展示 -->
+    <div class="items-show w ">
+        <div class="head ">
+            <h3>推荐游戏</h3>
+            <a href=" ">查看全部</a>
+        </div>
+        <div class="items-list ">
+            <ul class="clearfix ">
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+                <li>
+
+                    <div class="mainimg "><img src="./img/user.png " alt=" "></div>
+                    <img src="./img/user.png " alt=" " class="subimg ">
+                    <h4>SLIMU RUSH皇家版</h4>
+                    <div class="info "><span>【热销】</span> 11475人已入手</div>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="footer ">
+        <div class="w ">
+            <div class="copyright ">
+                <img src="img/logo2.png " alt=" ">
+                <p>全球游戏大赏第一名SLIMU RUSH 第一弹幕射击网络RPG游戏 <br />@2021年馒头骑士保留所有权力 -粤ICP备XXXXXX号</p>
+                <a href=" ">联系我们</a>
+            </div>
+            <div class="links ">
+                <dl>
+                    <dt>关于游戏</dt>
+                    <dd>
+                        <a href=" ">作者</a></dd>
+                    <dd>
+                        <a href=" ">语言</a></dd>
+                    <dd>
+                        <a href=" ">平台</a></dd>
+                    <dd>
+                        <a href=" ">剧情</a></dd>
+                    <dd>
+                        <a href=" ">彩蛋</a></dd>
+                </dl>
+                <dl>
+                    <dt>关于游戏</dt>
+                    <dd>
+                        <a href=" ">作者</a></dd>
+                    <dd>
+                        <a href=" ">语言</a></dd>
+                    <dd>
+                        <a href=" ">平台</a></dd>
+                    <dd>
+                        <a href=" ">剧情</a></dd>
+                    <dd>
+                        <a href=" ">彩蛋</a></dd>
+                </dl>
+                <dl>
+                    <dt>关于游戏</dt>
+                    <dd>
+                        <a href=" ">作者</a></dd>
+                    <dd>
+                        <a href=" ">语言</a></dd>
+                    <dd>
+                        <a href=" ">平台</a></dd>
+                    <dd>
+                        <a href=" ">剧情</a></dd>
+                    <dd>
+                        <a href=" ">彩蛋</a></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="bg-music" id="bg_music"><audio id="bg_audio" src="./audio/may_be_happy.mp3 " controls loop></audio> <img src="./img/slimu_shendan2.gif " alt=" " id="image_set"></div>
+
+
+
+</body>
+
+</html>
