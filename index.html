@@ -10,110 +10,8 @@
     <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- 一定要先加载jquery 把插件的顺序搞好= = -->
-    <script type="text/javascript">
-        var last_page = document.html;　
-        var animate_now = false;
-        // ready - function() - load - onload
-        // 直接隐藏 $('*').hide();
 
-
-
-        $(document).ready(function() { 　　
-            // 准备中　
-
-            // 控制全体链接 不跳转
-            $("a").attr("href", "javascript:void(0);");
-
-            $("a").click(function() {
-                alert("馒头骑士提醒您：", "本链接还在开发当中~");
-            });
-
-            // 背景音乐样式动态改变
-            $("#bg_music").mouseenter(function() {
-                // 先初始化状态 因为css总是在动态刷新其原有css样式.
-                $("#bg_audio").css("opacity", "0");
-                $("#bg_audio").stop().animate({
-                    opacity: "1"
-                }, speed = "slow", easing = "swing");
-
-
-            });
-
-            $("#bg_music").mouseleave(function() {
-                $("#bg_audio").stop().animate({
-                    opacity: "0"
-                }, speed = "slow", easing = "swing");
-            });
-
-
-        });
-
-        $(function() { 　　　
-            //执行的一般函数　
-            　　});
-
-        $(window).load(function() { 　
-            // 加载中　　　
-            　});
-
-
-        function animate_reloads() {
-
-            if (animate_now == false) {
-                // 动画开关器= =  低制作力
-                $("#image_set").stop().animate({
-                    height: "+=8px",
-                    width: "+=8px",
-                }, 200, easing = "swing", function() {
-                    $("#image_set").css("background-color", "gold");
-                    animate_now = true;
-                    animate_reloads();
-                });
-            } else {
-                $("#image_set").stop().animate({
-                    height: "-=8px",
-                    width: "-=8px",
-                }, 200, easing = "swing", function() {
-                    $("#image_set").css("background-color", "skyblue");
-                    animate_now = false;
-                    animate_reloads();
-                });
-            }
-        }
-
-
-        // 对于一些函数 需要在body中才能执行。所以要onload方法加载
-
-        window.onload = function() {
-            // 加载中 如果onload有指定其他函数则不执行
-
-            // listener永远的神
-            var audioplayer = document.querySelector('audio#bg_audio');
-            audioplayer.addEventListener('play', function() {
-                console.log("正在播放");
-                animate_reloads();
-            });
-            audioplayer.addEventListener('pause', function() {
-                console.log("停止了");
-                $("#image_set").animate().stop();
-                // 重置大小
-                $("#image_set").css({
-                    "height": "50px",
-                    "width": "50px",
-                    "background-color": "rgba(0, 0, 0, 0)"
-                });
-            });
-
-            // 点击前往顶部
-            var upper_set = document.querySelector('img#upper_img');
-            upper_set.addEventListener('click', function() {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 'normal');
-            });
-
-        }
-    </script>
+    <script src="./js/base.js" type="text/javascript"></script>
 
 </head>
 
@@ -134,7 +32,7 @@
                     <a href=" ">首页</a>
                 </li>
                 <li>
-                    <a href=" ">下载游戏</a>
+                    <a id="online_game" href="" target="_blank">在线试玩</a>
                 </li>
                 <li>
                     <a href=" ">游戏设定</a>
