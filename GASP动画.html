@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GASP动画效果</title>
+
+    <link rel="stylesheet" href="./css/gasp_test.css">
+
+
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+    <!-- GASP专业网页动画插件 -->
+    <script src="./js/greensock-js/src/minified/TweenLite.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/plugins/CSSPlugin.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/plugins/BezierPlugin.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/TimelineLite.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/easing/EasePack.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/TweenMax.min.js">
+    </script>
+</head>
+
+<body>
+    <div>
+        <img src="./asset/img/logo.png" alt="" id="mylogo">
+        <p id="logo_info">WELCOME TO SLIMU RUSH</p>
+    </div>
+    <button onclick=tl.play()>播放</button>
+    <button onclick=tl.reverse()>反向</button>
+    <script type="text/javascript">
+        var tl = new TimelineLite();
+        tl.add(TweenLite.to("#mylogo", 1, {
+            opacity: 1,
+            x: 200
+        })); //将一个动画添加到时间轴
+        tl.add(TweenLite.to("#logo_info", 1, {
+            opacity: 1,
+            x: 145
+        })); //将一个动画添加到时间轴末端，即与前一个动画接续
+        tl.add(TweenLite.to("#logo_info", 0.5, {
+            delay: 0.5,
+            color: "#fa0101"
+        })); //将一个动画添加到时间轴末端，即与前一个动画接续
+
+        tl.timeScale(1.5); //设置动画速度
+        tl.play();
+    </script>
+</body>
+
+</html>

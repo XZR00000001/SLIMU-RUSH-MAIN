@@ -1,0 +1,13 @@
+#mylogo {
+    position: relative;
+    opacity: 0;
+    padding: 10px;
+    width: 100px;
+}
+
+#logo_info {
+    position: relative;
+    width: 250px;
+    margin-top: 5px;
+    opacity: 0;
+}
