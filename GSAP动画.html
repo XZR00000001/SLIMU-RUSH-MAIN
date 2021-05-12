@@ -78,14 +78,17 @@
     </script>
 
     <script type="text/javascript">
+        CSSPlugin.defaultTransformPerspective = 500;
         var tl2 = new TimelineMax({
             repeat: -1,
             ease: Power1.easeInOut,
             yoyo: true
         });
+
         tl2.to("#mylogo2", 3, {
             x: 400,
-            rotation: 360,
+            rotationX: 360,
+            rotationY: 360,
             scale: 0.5
         });
     </script>
