@@ -9,6 +9,7 @@
 #logo_info {
     position: relative;
     width: 250px;
+    color: black;
     margin-top: 5px;
     opacity: 0;
 }
