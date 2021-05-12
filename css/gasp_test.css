@@ -1,6 +1,7 @@
 #mylogo {
     position: relative;
     opacity: 0;
+    text-align: center;
     padding: 10px;
     width: 100px;
 }

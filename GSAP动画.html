@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GASP动画效果</title>
+    <title>GSAP动画效果</title>
 
     <link rel="stylesheet" href="./css/gasp_test.css">
 
@@ -30,21 +30,36 @@
 
 <body>
     <h2>1.简单渐变动画</h2>
-    <div>
-        <img src="./asset/img/logo.png" alt="" id="mylogo">
+    <div style="width:550px; border: 2px solid #e4e4e4;">
+        <img src="./img/logo.png" alt="" id="mylogo">
         <p id="logo_info">WELCOME TO SLIMU RUSH</p>
     </div>
+    <br />
     <button onclick=tl.play()>播放</button>
+    <button onclick=tl.play(1)>在1秒处播放</button>
     <button onclick=tl.reverse()>反向</button>
+    <button onclick=tl.reverse(1)>从1秒处反向</button>
+    <button onclick=tl.restart()>重新播放</button>
+    <button onclick=tl.pause()>暂停</button>
+    <button onclick=tl.resume()>继续</button>
+    <button onclick=tl.seek(1)>随当前播放方向跳到1秒动画处</button>
+    <button onclick=tl.timeScale(0.5)>变慢到0.5倍</button>
+    <button onclick=tl.timeScale(1)>正常速度</button>
+    <button onclick=tl.timeScale(1.5)>加快到1.5倍</button>
     <script type="text/javascript">
         var tl = new TimelineLite();
+        tl.set("#mylogo", {
+            scale: 0,
+            x: 200
+        }); //元素初始化
+
         tl.add(TweenLite.to("#mylogo", 1, {
             opacity: 1,
-            x: 200
+            scale: 1
         })); //将一个动画添加到时间轴
         tl.add(TweenLite.to("#logo_info", 1, {
             opacity: 1,
-            x: 145
+            x: 145,
         })); //将一个动画添加到时间轴末端，即与前一个动画接续
         tl.add(TweenLite.to("#logo_info", 0.5, {
             delay: 0.5,
