@@ -13,3 +13,19 @@
     margin-top: 5px;
     opacity: 0;
 }
+
+hr {
+    margin-top: 20px;
+}
+
+#text1 {
+    font-size: 200%;
+}
+
+.class1 {
+    color: #6fb936;
+}
+
+.class2 {
+    color: #f38630;
+}
