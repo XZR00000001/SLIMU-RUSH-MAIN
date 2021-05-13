@@ -85,7 +85,7 @@
 
     <hr>
 
-    <h2>7.轮播图</h2>
+    <h2>7.1 循环轮播图</h2>
     <div class="wrapper">
         <div class="boxes">
             <div class="box">S</div>
@@ -101,6 +101,15 @@
         </div>
     </div>
 
+    <hr>
+
+    <h2>7.2 轮播图文字特效测试</h2>
+    <p class="title_fx" id="title_fx_1">WELCOME TO SLIMU RUSH</p>
+    <p class="title_fx" id="title_fx_2">WELCOME TO SLIMU RUSH</p>
+    <p class="title_fx" id="title_fx_3">WELCOME TO SLIMU RUSH</p>
+    <hr>
+
+    <h2>7.3 轮播图+特效</h2>
     <script type="text/javascript">
         var tl = new TimelineLite();
         tl.set("#mylogo", {
@@ -322,6 +331,29 @@
             },
             repeat: -1
         });
+    </script>
+
+    <script type="text/javascript">
+        TweenLite.set("#title_fx_1", {
+            perspective: 400
+        });
+
+        var tl = new TimelineMax({
+            repeat: -1,
+            yoyo: true
+        });
+        tl.staggerFrom("#title_fx_1", 0.8, {
+            opacity: 0,
+            scale: 0,
+            y: 80,
+            rotationX: 180,
+            transformOrigin: "0% 50% -50",
+            ease: Back.easeOut
+        }, 0.03);
+
+
+
+        tl.play();
     </script>
 </body>
 

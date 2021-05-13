@@ -61,3 +61,9 @@ hr {
     position: relative;
     left: -50px;
 }
+
+.title_fx {
+    font-weight: 700;
+    font-size: 20px;
+    width: 300px;
+}
