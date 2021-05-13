@@ -64,7 +64,13 @@
 
     <hr>
     <h2>4.文本特效</h2>
-    <p id="text1"></p>
+    <p id="text1" style="height: 50px;"></p>
+
+    <hr>
+    <h2>5.SLIMU 飞行</h2>
+    <div style="position: relative; margin-top: 20px; width:550px; height: 200px; line-height: 270px;  border: 2px solid #e4e4e4;">
+        <img src="./img/logo.png" alt="" id="mylogo4" style="position: absolute; width: 64px; margin-left: 20px; margin-top: 5px;">
+    </div>
     <script type="text/javascript">
         var tl = new TimelineLite();
         tl.set("#mylogo", {
@@ -173,6 +179,37 @@
                 },
                 ease: Linear.easeNone
             });
+    </script>
+    <script type="text/javascript">
+        var tl5 = new TimelineMax({
+            repeat: -1
+        });
+
+        tl5.add(TweenLite.fromTo("#mylogo4", 1, {
+            scale: 0,
+            opacity: 0
+        }, {
+            scale: 1,
+            opacity: 1,
+            ease: Back.easeInOut
+        }));
+
+        tl5.add(TweenLite.to("#mylogo4", 1, {
+            top: '35%',
+            left: 20,
+            rotation: 90,
+            delay: 1,
+            ease: Back.easeInOut,
+        }));
+        tl5.add(TweenLite.to("#mylogo4", 2, {
+            left: '100%',
+            scale: 0.2,
+            opacity: 0,
+            ease: Back.easeIn,
+        }));
+        tl5.add(TweenLite.to("#mylogo4", 1, {})); //设置一个空事件 仅仅是拖时间
+
+        tl5.repeat();
     </script>
 </body>
 
