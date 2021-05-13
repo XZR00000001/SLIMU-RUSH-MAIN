@@ -67,3 +67,63 @@ hr {
     font-size: 20px;
     width: 300px;
 }
+
+.img_scroll {
+    height: 400px;
+    width: 600px;
+    overflow: hidden;
+    position: relative;
+    border: 5px solid #e4e4e4;
+    border-radius: 5px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.img_wrap {
+    position: absolute;
+    width: 3600px;
+    height: 400px;
+}
+
+.img_item {
+    position: relative;
+}
+
+.img_wrap img {
+    float: left;
+    width: 600px;
+    height: 400px;
+    background-color: skyblue;
+}
+
+.img_wrap p {
+    position: absolute;
+    display: inline;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    margin-top: 20px;
+}
+
+#cube_3d {
+    position: relative;
+    display: inline-block;
+    width: 500px;
+    height: 500px;
+    top: -100px;
+}
+
+#cube_box div {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    padding: 0;
+    margin: 0;
+    background: url(../img/block.png);
+    border: solid 2px #FFF;
+}

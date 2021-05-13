@@ -110,9 +110,66 @@
     <p class="title_fx" id="title_fx_3">WELCOME TO SLIMU RUSH</p>
     <hr>
 
-    <h2>7.3 轮播图+特效</h2>
+    <h2>7.3 点击轮播图</h2>
+    <div class="img_scroll">
+        <div class="img_wrap">
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH 皇家版</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH 皇家版</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+            <div class="img_item">
+                <p class="img_info">SLIMU RUSH 皇家版</p>
+                <img src="./img/logo.png" alt="" class="img_set">
+
+            </div>
+
+        </div>
+        <div class="buttons">
+            <button onclick=click_img(0)>1</button>
+            <button onclick=click_img(1)>2</button>
+            <button onclick=click_img(2)>3</button>
+            <button onclick=click_img(3)>4</button>
+            <button onclick=click_img(4)>5</button>
+            <button onclick=click_img(5)>6</button>
+        </div>
+    </div>
+    <hr>
+
+    <h2>8. 3D旋转多面体</h2>
+    <div id="cube_3d">
+        <div id="cube_box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <script type="text/javascript">
-        var tl = new TimelineLite();
+        var tl = new TimelineMax();
         tl.set("#mylogo", {
             scale: 0,
             x: 200
@@ -336,31 +393,196 @@
 
     <script type="text/javascript">
         var splitTitle = new SplitText($("#title_fx_1"));
-        var splitTitle2 = new SplitText($("#title_fx_2"));
-        var revertTitle = function() {
-            splitTitle.revert();
-        }
         TweenLite.set("#title_fx_1", {
             perspective: 400,
         });
 
-        var tl = new TimelineMax({
+        var tl7_1 = new TimelineMax({
             repeat: -1,
             yoyo: true,
         });
-        tl.staggerFrom(splitTitle.chars, 0.8, {
+        tl7_1.staggerFrom(splitTitle.chars, 0.8, {
             opacity: 0,
             scale: 0,
             y: 80,
             rotationX: 180,
             transformOrigin: "0% 50% -50",
             ease: Back.easeOut
-        }, 0.03);
+        }, 0.03).to(splitTitle.chars, 0.5, {});
 
 
+        var splitTitle2 = new SplitText($("#title_fx_2"));
+        TweenLite.set("#title_fx_2", {
+            perspective: 0,
+        });
 
-        tl.play();
+        var tl7_2 = new TimelineMax({
+            repeat: -1,
+            yoyo: true,
+        });
+        tl7_2.staggerFrom(splitTitle2.chars, 0.8, {
+            opacity: 0,
+            scale: 0,
+            x: 150,
+            ease: Back.easeInOut,
+        }, 0.1).to(splitTitle2.chars, 0.5, {}).to(
+            splitTitle2.chars, 1, {
+                y: -10,
+                ease: Back.easeInOut
+            }, 0.03);
+
+
+        var splitTitle3 = new SplitText($("#title_fx_3"));
+        TweenLite.set("#title_fx_3", {
+            perspective: 400,
+        });
+        var tl7_3 = new TimelineMax({
+            repeat: -1,
+            yoyo: true
+        });
+
+        tl7_3.staggerFrom(splitTitle3.chars, 0.5, {
+            opacity: 0,
+            scale: 0,
+            y: 50,
+            ease: Back.easeIn
+        }, 0.03).to(splitTitle3.chars, 0.5, {});
+
+
+        tl7_1.play();
+        tl7_2.play();
+        tl7_3.play();
     </script>
+
+    <script type="text/javascript">
+        var now_item = 0;
+        var colors = ["#f38630", "#6fb936", "#ccc", "#6fb936", "#ccc", "#f38630"];
+        var tl8 = new TimelineLite();
+        var items = $(".img_item");
+        for (let i = 0; i < 6; i++) {
+            tl8.set(items[i].children[1], {
+                backgroundColor: colors[i]
+            });
+        }
+
+        function click_img(ids) {
+            if (now_item != ids) {
+                now_item = ids;
+                var split_set = new SplitText(items[ids].children[0]); //获取小模块里的字符串
+                var tl9 = new TimelineMax();
+                tl9.to(".img_wrap", 0.8, {
+                    left: -600 * ids
+                }).staggerFrom(split_set.chars, 0.8, {
+                    opacity: 0,
+                    scale: 0,
+                    y: -100,
+                    rotationX: 180,
+                    transformOrigin: "0% 50% -50",
+                    ease: Back.easeInOut
+                }, 0.03);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        var cube_3d = $("#cube_3d"),
+            cube_box = $("#cube_box"),
+            stageW = ($(window).width()) / 2,
+            stageH = ($(window).height()) / 2,
+            stageX = (stageW - (cube_box.width() / 2)),
+            stageY = (stageH - (250 / 2));
+
+        var box_set = $("#cube_box div");
+        var tl10 = new TimelineMax({
+            onUpdate: update_cube,
+            repeat: -1
+        });
+
+        tl10.set(cube_box, {
+            css: {
+                transformPerspective: 3000,
+                transformStyle: "preserve-3d"
+            }
+        });
+
+        tl10.set(
+                box_set[0], {
+                    rotationX: 0,
+                    rotationY: 0,
+                    x: 0,
+                    y: 0,
+                    z: 125,
+                    opacity: 0.85
+                })
+            .set(box_set[1], {
+                rotationX: 0,
+                rotationY: -90,
+                x: -125,
+                y: 0,
+                z: 0,
+                opacity: 0.85
+            })
+            .set(box_set[2], {
+                rotationX: 0,
+                rotationY: 90,
+                x: 125,
+                y: 0,
+                z: 0,
+                opacity: 0.85
+            })
+            .set(box_set[3], {
+                rotationX: 90,
+                rotationY: 0,
+                x: 0,
+                y: -125,
+                z: 0,
+                opacity: 0.85
+            })
+            .set(box_set[4], {
+                rotationX: -90,
+                rotationY: 0,
+                x: 0,
+                y: 125,
+                z: 0,
+                opacity: 0.85
+            })
+            .set(box_set[5], {
+                rotationX: 0,
+                rotationY: 180,
+                x: 0,
+                y: 0,
+                z: -125,
+                opacity: 0.85
+            })
+            .set(cube_box, {
+                x: 250,
+                y: 250,
+            });
+
+
+        tl10.to(cube_box, 15, {
+            css: {
+                rotationY: 360,
+                rotationX: -720,
+            },
+            ease: Power0.easeNone
+        });
+
+        function update_cube() {
+            stageW = ($(window).width()) / 2;
+            stageH = ($(window).height()) / 2;
+            stageX = (stageW - (cube_box.width() / 2));
+            stageY = (stageH - (250 / 2));
+            TweenMax.to(cube_box, 1, {
+                css: {
+                    x: stageX,
+                    y: stageY
+                }
+            });
+        }
+    </script>
+
+
 </body>
 
 </html>
