@@ -29,3 +29,35 @@ hr {
 .class2 {
     color: #f38630;
 }
+
+.wrapper {
+    width: 450px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+    background: #ccc;
+    overflow: hidden;
+}
+
+.wrapper::after {
+    width: 448px;
+    height: 48px;
+    content: "";
+    position: absolute;
+    border: solid 1px white;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: red;
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.boxes {
+    position: relative;
+    left: -50px;
+}

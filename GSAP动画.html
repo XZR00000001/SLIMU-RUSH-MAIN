@@ -27,6 +27,8 @@
     <script src="./js/greensock-js/src/minified/TweenMax.min.js">
     </script>
     <script src="./js/greensock-js/src/minified/plugins/TextPlugin.min.js"></script>
+    <script src="./js/greensock-js/src/minified/plugins/ScrollToPlugin.min.js"></script>
+    <script src="./js/greensock-js/src/minified/plugins/ModifiersPlugin.min.js"></script>
 </head>
 
 <body>
@@ -50,7 +52,7 @@
 
     <hr>
 
-    <h2>2.反复横跳</h2>
+    <h2>2.3D反复横跳</h2>
     <div style="width:550px; height: 200px; line-height: 270px;  border: 2px solid #e4e4e4;">
         <img src="./img/logo.png" alt="" id="mylogo2" style="width: 100px; margin-left: 20px;">
     </div>
@@ -77,11 +79,28 @@
     <h3>SLIMU成长中！！</h3>
     <h1 id="param_test"></h1>
     <h3>以50为基础量 变化</h3>
-    <div class="box green" style="height: 64px;"><img src="./img/logo.png" alt="" id="mylogo5" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
+    <div class="green" style="height: 64px;width: 100px;"><img src="./img/logo.png" alt="" id="mylogo5" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
     <h3>以200为基础量 变化</h3>
-    <div class="box orange" style="height: 64px;"><img src="./img/logo.png" alt="" id="mylogo6" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
+    <div class="orange" style="height: 64px; width: 100px;"><img src="./img/logo.png" alt="" id="mylogo6" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
 
     <hr>
+
+    <h2>7.轮播图</h2>
+    <div class="wrapper">
+        <div class="boxes">
+            <div class="box">S</div>
+            <div class="box">L</div>
+            <div class="box">I</div>
+            <div class="box">M</div>
+            <div class="box">U</div>
+            <div class="box"><img src="./img/logo.png" alt="" style="margin-top: 5px; width: 40px; height: 40px;"></div>
+            <div class="box">R</div>
+            <div class="box">U</div>
+            <div class="box">S</div>
+            <div class="box">H</div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         var tl = new TimelineLite();
         tl.set("#mylogo", {
@@ -150,7 +169,7 @@
         var tl4 = new TimelineMax({
             repeat: -1
         });
-        tl4.to("#text1", 2, {
+        tl4.to("#text1", 1, {
                 text: {
                     value: "WELCOME",
                     newClass: "class2",
@@ -158,7 +177,7 @@
                 },
                 ease: Linear.easeNone
             })
-            .to("#text1", 2, {
+            .to("#text1", 1, {
                 text: {
                     value: "TO",
                     newClass: "class2",
@@ -166,7 +185,7 @@
                 },
                 ease: Linear.easeNone
             })
-            .to("#text1", 2, {
+            .to("#text1", 1, {
                 text: {
                     value: "THE",
                     newClass: "class2",
@@ -174,7 +193,7 @@
                 },
                 ease: Linear.easeNone
             })
-            .to("#text1", 2, {
+            .to("#text1", 1, {
                 text: {
                     value: "SLIMU RUSH!!!",
                     newClass: "class2",
@@ -182,14 +201,15 @@
                 },
                 ease: Linear.easeNone
             })
-            .to("#text1", 2, {
+            .to("#text1", 1, {
                 text: {
                     value: "THANK YOU",
                     newClass: "class2",
                     oldClass: "class1"
                 },
                 ease: Linear.easeNone
-            });
+            })
+            .to("#text1", 1, {}); //设置一个空序列，用于留点空白
     </script>
     <script type="text/javascript">
         var tl5 = new TimelineMax({
@@ -209,7 +229,7 @@
             top: '35%',
             left: 20,
             rotation: 90,
-            delay: 1,
+            delay: 0.5,
             ease: Back.easeInOut,
         }));
         tl5.add(TweenLite.to("#mylogo4", 2, {
@@ -230,8 +250,13 @@
             value: 0
         }
 
+
+        //可以由更新，重复，返回，开始，完成 5个状态去设置函数。  比如onUpdate  onReverse 等
+
+        //在tween下还可以设置动画的排列方式 初始化的时候设置align属性 默认是派对类型sequence 选择normal的话 就是同时来。但是不忽略delay   使用start的话就是忽略delay， 直接全部放到前面。
+
         //每次增10 使用update
-        TweenLite.to(obj, 5, {
+        var tween1 = TweenLite.to(obj, 5, {
             value: 600,
             roundProps: {
                 value: 10
@@ -239,28 +264,63 @@
             onUpdate: function() {
                 header.innerHTML = obj.value;
             }
-        })
+        });
 
         //每次增加50 使用update
-        TweenLite.to(".green", 5, {
+        var tween2 = TweenLite.to(".green", 5, {
             x: 600,
             roundProps: {
                 x: 50
             },
             onUpdate: function() {
-                this.target[0].children[1].innerHTML = this.target[0]._gsTransform.x / 50 + "级啦！";
+                this.target[0].children[1].innerHTML = Math.floor(obj.value / 50) + "级啦！";
             }
         });
 
         //每次增加200 使用update
-        TweenLite.to(".orange", 5, {
+        var tween3 = TweenLite.to(".orange", 5, {
             x: 150,
             roundProps: {
-                x: 50
+                x: 10
             },
             onUpdate: function() {
-                this.target[0].children[1].innerHTML = Math.floor(this.target[0]._gsTransform.x / 50) + "级啦！";
+                this.target[0].children[1].innerHTML = Math.floor(obj.value / 200) + "级啦！";
             }
+        });
+
+        var tl6 = new TimelineMax({
+            tweens: [tween1, tween2, tween3],
+            repeat: -1,
+            align: "start",
+        });
+
+        tl6.play();
+    </script>
+
+    <script type="text/javascript">
+        var $overflow = $("#overflow");
+        var colors = ["#f38630", "#6fb936", "#ccc", "#6fb936"];
+
+        //初始化每个块的颜色和位置为一排
+        TweenMax.set(".box", {
+            backgroundColor: function(i) {
+                return colors[i % colors.length];
+            },
+            x: function(i) {
+                return i * 50;
+            }
+        });
+
+
+        TweenMax.to(".box", 5, {
+            ease: Linear.easeNone,
+            x: "+=500", //将每个块向右移动500px
+            modifiers: {
+                x: function(x) {
+                    return x % 500; //强制x值在0和500之间
+                }
+            },
+            repeat: -1
         });
     </script>
 </body>
