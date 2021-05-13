@@ -71,6 +71,17 @@
     <div style="position: relative; margin-top: 20px; width:550px; height: 200px; line-height: 270px;  border: 2px solid #e4e4e4;">
         <img src="./img/logo.png" alt="" id="mylogo4" style="position: absolute; width: 64px; margin-left: 20px; margin-top: 5px;">
     </div>
+
+    <hr>
+    <h2>6.随变量变化</h2>
+    <h3>SLIMU成长中！！</h3>
+    <h1 id="param_test"></h1>
+    <h3>以50为基础量 变化</h3>
+    <div class="box green" style="height: 64px;"><img src="./img/logo.png" alt="" id="mylogo5" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
+    <h3>以200为基础量 变化</h3>
+    <div class="box orange" style="height: 64px;"><img src="./img/logo.png" alt="" id="mylogo6" style="position: absolute; width: 64px;"><span style="position: absolute;">等级</span></div>
+
+    <hr>
     <script type="text/javascript">
         var tl = new TimelineLite();
         tl.set("#mylogo", {
@@ -210,6 +221,47 @@
         tl5.add(TweenLite.to("#mylogo4", 1, {})); //设置一个空事件 仅仅是拖时间
 
         tl5.repeat();
+    </script>
+
+    <script type="text/javascript">
+        var header = document.querySelector("#param_test");
+
+        var obj = {
+            value: 0
+        }
+
+        //每次增10 使用update
+        TweenLite.to(obj, 5, {
+            value: 600,
+            roundProps: {
+                value: 10
+            },
+            onUpdate: function() {
+                header.innerHTML = obj.value;
+            }
+        })
+
+        //每次增加50 使用update
+        TweenLite.to(".green", 5, {
+            x: 600,
+            roundProps: {
+                x: 50
+            },
+            onUpdate: function() {
+                this.target[0].children[1].innerHTML = this.target[0]._gsTransform.x / 50 + "级啦！";
+            }
+        });
+
+        //每次增加200 使用update
+        TweenLite.to(".orange", 5, {
+            x: 150,
+            roundProps: {
+                x: 50
+            },
+            onUpdate: function() {
+                this.target[0].children[1].innerHTML = Math.floor(this.target[0]._gsTransform.x / 50) + "级啦！";
+            }
+        });
     </script>
 </body>
 
