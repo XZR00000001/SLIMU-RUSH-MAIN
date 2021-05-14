@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>首页动画测试</title>
     <audio src="./audio/may_be_happy.mp3" preload="meta" loop autoplay id="bgmusic"></audio>
     <link rel="stylesheet" href="./css/首页动画.css">
@@ -39,12 +39,12 @@
             <div class="boxes">2</div>
         </div>
     </div>
-    <div class="index_outer">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+
+    <div id="index_outer1" class="index_outer"></div>
+    <div id="index_outer2" class="index_outer"></div>
+    <div id="index_outer3" class="index_outer"></div>
+    <div id="index_outer4" class="index_outer"></div>
+
     <div class="index_set">
         <div class="index_center">
             <a href="./index.html">SLIMU RUSH游戏首页</a>
@@ -136,11 +136,11 @@
             scale: 0
         }); //初始化
 
-        tl1.to([index_outers[0], index_outers[1]], 0.8, {
+        tl1.to([$("#index_outer1"), $("#index_outer2")], 0.8, {
             top: 0,
             delay: 1,
             ease: Power1.easeInOut
-        }).to([index_outers[2], index_outers[3]], 0.8, {
+        }).to([$("#index_outer3"), $("#index_outer4")], 0.8, {
             right: 0,
             ease: Power1.easeInOut
         }, ).to(titles, 1, {
