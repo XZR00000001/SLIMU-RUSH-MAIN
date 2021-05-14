@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.logo_set {
+    left: 5%;
+    bottom: -20%;
+    position: absolute;
+    z-index: -1;
+}
+
+.logo_set img {
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+}
+
+.logo_set2 {
+    left: 53%;
+    bottom: 55%;
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.logo_set2 img {
+    width: 64px;
+    height: 64px;
+    padding: 15px;
+}
+
+.index_set {
+    position: absolute;
+    height: 80px;
+    top: calc(50% - 150px);
+    left: calc(50% - 100px);
+    background-color: skyblue;
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    transition: all 0.5s;
+    font-weight: 700;
+    margin: 10px 20px;
+    color: white;
+    border: 2px solid white;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    /* 注意 animation的有些属性 不能作用在行内元素上  请转换为块元素 行内块元素 */
+    transform: scale(1.2);
+    transition: 0.5s ease-in-out;
+}
+
+.index_outer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.index_outer div {
+    position: absolute;
+}
+
+.index_outer div:nth-child(1) {
+    top: -100%;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background-color: red;
+}
+
+.index_outer div:nth-child(2) {
+    top: 100%;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background-color: green;
+}
+
+.index_outer div:nth-child(3) {
+    right: 100%;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+}
+
+.index_outer div:nth-child(4) {
+    right: -100%;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: yellow;
+}

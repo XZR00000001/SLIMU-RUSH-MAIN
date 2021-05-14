@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页动画测试</title>
+    <link rel="stylesheet" href="./css/首页动画.css">
+
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- GASP专业网页动画插件 -->
+    <script src="./js/greensock-js/src/minified/TweenLite.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/plugins/CSSPlugin.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/plugins/BezierPlugin.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/TimelineLite.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/easing/EasePack.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/TweenMax.min.js">
+    </script>
+    <script src="./js/greensock-js/src/minified/plugins/TextPlugin.min.js"></script>
+    <script src="./js/greensock-js/src/minified/plugins/ScrollToPlugin.min.js"></script>
+    <script src="./js/greensock-js/src/minified/plugins/ModifiersPlugin.min.js"></script>
+    <script src="./js/greensock-js/src/SplitText.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="index_outer">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="index_set">
+        <div class="index_center">
+            <a href="./index.html">SLIMU RUSH游戏首页</a>
+            <a href="./GSAP动画.html">GSAP动画demo</a>
+        </div>
+    </div>
+    <div class="logo_set"><img src="./img/logo.png" alt="" id="logo1"></div>
+    <div class="logo_set2"><img src="./img/slimu_shendan2.gif" alt="" id="logo2"></div>
+    <script type="text/javascript">
+        var tl1 = new TimelineMax();
+        var index_outers = $(".index_outer").children();
+        var titles = $(".index_set");
+        var logo_img = $(".logo_set");
+        var logo_img2 = $(".logo_set2");
+        tl1.set(titles, {
+            opacity: 0,
+            scale: 0
+        }); //初始化
+
+        tl1.to([index_outers[0], index_outers[1]], 0.8, {
+            top: 0,
+            delay: 1,
+            ease: Power1.easeInOut
+        }).to([index_outers[2], index_outers[3]], 0.8, {
+            right: 0,
+            ease: Power1.easeInOut
+        }).to(titles, 1, {
+            scale: 1,
+            opacity: 1,
+            ease: Bounce.easeOut
+        }).to(logo_img, 0.8, {
+            bottom: "20%",
+            ease: Power1.easeInOut
+        }).set(logo_img, {
+            "z-index": 1
+        }).to(logo_img, 0.8, {
+            bottom: "0%",
+            ease: Bounce.easeOut
+        }).set(logo_img2, {
+            opacity: 1
+        }).to(logo_img2, 0.4, {
+            bottom: "70%",
+            ease: Power1.easeInOut
+        }).set(logo_img2, {
+            "z-index": 1
+        }).to(logo_img2, 0.4, {
+            bottom: "66%",
+            ease: Bounce.easeOut
+        }).to(logo_img2, 0.2, {
+            x: 10,
+            rotation: 10,
+            delay: 0.5
+        }).to(logo_img2, 0.2, {
+            x: -10,
+            rotation: -10,
+            delay: 0.5
+        }).to(logo_img2, 0.5, {
+            x: 0,
+            rotation: 0,
+            delay: 0.5
+        });
+    </script>
+</body>
+
+</html>
