@@ -47,11 +47,56 @@
     <div class="logo_set"><img src="./img/logo.png" alt="" id="logo1"></div>
     <div class="logo_set2"><img src="./img/slimu_shendan2.gif" alt="" id="logo2"></div>
     <script type="text/javascript">
-        var tl1 = new TimelineMax();
         var index_outers = $(".index_outer").children();
         var titles = $(".index_set");
         var logo_img = $(".logo_set");
         var logo_img2 = $(".logo_set2");
+        var tl2 = new TimelineMax({
+            repeat: -1,
+            align: "sequence"
+        });
+        var tl3 = new TimelineMax({
+            repeat: -1,
+            align: "sequence"
+        });
+
+        function last_animate() {
+            tl2.pause();
+            tl3.pause();
+            tl2.to(logo_img, 0.8, {
+                y: -150,
+                delay: 0.2,
+                ease: Power1.easeInOut
+            }).to(logo_img, 0.8, {
+                y: 0,
+                ease: Bounce.easeOut,
+            });
+            tl3.to(logo_img2, 0.8, {
+                rotation: 15,
+                delay: 0.2,
+                ease: Power1.easeInOut
+            }).to(logo_img2, 0.8, {
+                rotation: 0,
+                ease: Power1.easeInOut
+            }).to(logo_img2, 0.8, {
+                rotation: -15,
+                ease: Power1.easeInOut
+            }).to(logo_img2, 0.8, {
+                rotation: 0,
+                ease: Power1.easeInOut
+            });
+            tl3.play(0);
+            tl2.play(0); //保证在时间轴0秒 开始
+        }
+
+        function last_animate2() {
+            console.log("完成了！！！");
+        }
+
+        var tl1 = new TimelineMax({
+            align: 'sequence',
+        });
+
         tl1.set(titles, {
             opacity: 0,
             scale: 0
@@ -64,41 +109,40 @@
         }).to([index_outers[2], index_outers[3]], 0.8, {
             right: 0,
             ease: Power1.easeInOut
-        }).to(titles, 1, {
+        }, ).to(titles, 1, {
             scale: 1,
             opacity: 1,
             ease: Bounce.easeOut
-        }).to(logo_img, 0.8, {
+        }, ).to(logo_img, 0.8, {
             bottom: "20%",
             ease: Power1.easeInOut
-        }).set(logo_img, {
+        }, ).set(logo_img, {
             "z-index": 1
-        }).to(logo_img, 0.8, {
+        }, ).to(logo_img, 0.8, {
             bottom: "0%",
             ease: Bounce.easeOut
-        }).set(logo_img2, {
+        }, ).set(logo_img2, {
             opacity: 1
-        }).to(logo_img2, 0.4, {
-            bottom: "70%",
+        }, ).to(logo_img2, 0.4, {
+            bottom: "75.5%",
+            left: "54.5%",
             ease: Power1.easeInOut
-        }).set(logo_img2, {
+        }, ).set(logo_img2, {
             "z-index": 1
-        }).to(logo_img2, 0.4, {
-            bottom: "66%",
+        }, ).to(logo_img2, 0.4, {
+            bottom: "68%",
             ease: Bounce.easeOut
-        }).to(logo_img2, 0.2, {
+        }, ).to(logo_img2, 0.2, {
             x: 10,
             rotation: 10,
-            delay: 0.5
-        }).to(logo_img2, 0.2, {
+        }, "+=0.5").to(logo_img2, 0.2, {
             x: -10,
             rotation: -10,
-            delay: 0.5
-        }).to(logo_img2, 0.5, {
+        }, "+=0.5").to(logo_img2, 0.5, {
             x: 0,
             rotation: 0,
-            delay: 0.5
         });
+        tl1.addCallback(last_animate, "+=1"); //使用此方法在TimelineMax里面时间轴最后面1秒后执行
     </script>
 </body>
 

@@ -26,8 +26,8 @@ body {
 }
 
 .logo_set2 {
-    left: 53%;
-    bottom: 55%;
+    left: 50%;
+    bottom: 60%;
     position: absolute;
     opacity: 0;
     z-index: -1;
@@ -36,14 +36,14 @@ body {
 .logo_set2 img {
     width: 64px;
     height: 64px;
-    padding: 15px;
+    padding: 0;
 }
 
 .index_set {
     position: absolute;
     height: 80px;
     top: calc(50% - 150px);
-    left: calc(50% - 100px);
+    left: calc(50% - 120px);
     background-color: skyblue;
     border: 5px solid rgb(0, 0, 0);
     border-radius: 5px;
