@@ -12,6 +12,30 @@ body {
     overflow: hidden;
 }
 
+#title1 {
+    position: absolute;
+    height: 50px;
+    width: 1000px;
+    left: 27.5%;
+    bottom: 45%;
+    z-index: 1;
+    font-size: 36px;
+    font-weight: 700;
+    opacity: 0;
+}
+
+#title2 {
+    position: absolute;
+    height: 50px;
+    width: 1000px;
+    left: 37.5%;
+    bottom: 30%;
+    z-index: 1;
+    font-size: 36px;
+    font-weight: 700;
+    opacity: 0;
+}
+
 .logo_set {
     left: 5%;
     bottom: -20%;

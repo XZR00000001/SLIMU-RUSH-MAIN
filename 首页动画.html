@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首页动画测试</title>
+    <audio src="./audio/may_be_happy.mp3" preload="meta" loop autoplay id="bgmusic"></audio>
     <link rel="stylesheet" href="./css/首页动画.css">
 
     <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
@@ -46,7 +47,11 @@
     </div>
     <div class="logo_set"><img src="./img/logo.png" alt="" id="logo1"></div>
     <div class="logo_set2"><img src="./img/slimu_shendan2.gif" alt="" id="logo2"></div>
+    <p id="title1">WELCOME TO THE SLIMU RUSH!!!~</p>
+    <p id="title2">HAVE A NICE DAY!~</p>
     <script type="text/javascript">
+        var split1 = new SplitText($("#title1"));
+        var split2 = new SplitText($("#title2"));
         var index_outers = $(".index_outer").children();
         var titles = $(".index_set");
         var logo_img = $(".logo_set");
@@ -59,15 +64,17 @@
             repeat: -1,
             align: "sequence"
         });
+        var tl4 = new TimelineMax({
+            align: "sequence"
+        });
 
         function last_animate() {
             tl2.pause();
             tl3.pause();
-            tl2.to(logo_img, 0.8, {
-                y: -150,
-                delay: 0.2,
+            tl2.to(logo_img, 0.4, {
+                y: -100,
                 ease: Power1.easeInOut
-            }).to(logo_img, 0.8, {
+            }).to(logo_img, 0.5, {
                 y: 0,
                 ease: Bounce.easeOut,
             });
@@ -85,12 +92,24 @@
                 rotation: 0,
                 ease: Power1.easeInOut
             });
+            tl4.set($("#title1"), {
+                opacity: 1
+            });
+            tl4.set($("#title2"), {
+                opacity: 1
+            });
+            tl4.staggerFrom(split1.chars, 0.8, {
+                opacity: 0,
+                scale: 0,
+                ease: Power1.easeInOut
+            }, 0.03).staggerFrom(split2.chars, 0.8, {
+                opacity: 0,
+                scale: 0,
+                ease: Power1.easeInOut
+            }, 0.03);
+            tl4.play(0);
             tl3.play(0);
             tl2.play(0); //保证在时间轴0秒 开始
-        }
-
-        function last_animate2() {
-            console.log("完成了！！！");
         }
 
         var tl1 = new TimelineMax({
@@ -132,17 +151,8 @@
         }, ).to(logo_img2, 0.4, {
             bottom: "68%",
             ease: Bounce.easeOut
-        }, ).to(logo_img2, 0.2, {
-            x: 10,
-            rotation: 10,
-        }, "+=0.5").to(logo_img2, 0.2, {
-            x: -10,
-            rotation: -10,
-        }, "+=0.5").to(logo_img2, 0.5, {
-            x: 0,
-            rotation: 0,
-        });
-        tl1.addCallback(last_animate, "+=1"); //使用此方法在TimelineMax里面时间轴最后面1秒后执行
+        }, );
+        tl1.addCallback(last_animate, "+=0.2"); //使用此方法在TimelineMax里面时间轴最后面1秒后执行
     </script>
 </body>
 
