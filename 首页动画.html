@@ -32,7 +32,13 @@
 </head>
 
 <body>
-
+    <div id="back1"></div>
+    <div id="back2">
+        <div class="back_wrap">
+            <div class="boxes">1</div>
+            <div class="boxes">2</div>
+        </div>
+    </div>
     <div class="index_outer">
         <div></div>
         <div></div>
@@ -47,8 +53,12 @@
     </div>
     <div class="logo_set"><img src="./img/logo.png" alt="" id="logo1"></div>
     <div class="logo_set2"><img src="./img/slimu_shendan2.gif" alt="" id="logo2"></div>
-    <p id="title1">WELCOME TO THE SLIMU RUSH!!!~</p>
-    <p id="title2">HAVE A NICE DAY!~</p>
+    <div>
+        <p id="title1">WELCOME TO THE SLIMU RUSH!!!~</p>
+    </div>
+    <div>
+        <p id="title2">HAVE A NICE DAY!~</p>
+    </div>
     <script type="text/javascript">
         var split1 = new SplitText($("#title1"));
         var split2 = new SplitText($("#title2"));
@@ -56,6 +66,7 @@
         var titles = $(".index_set");
         var logo_img = $(".logo_set");
         var logo_img2 = $(".logo_set2");
+
         var tl2 = new TimelineMax({
             repeat: -1,
             align: "sequence"
