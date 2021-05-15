@@ -29,6 +29,18 @@
     <script src="./js/greensock-js/src/minified/plugins/ModifiersPlugin.min.js"></script>
     <script src="./js/greensock-js/src/SplitText.min.js"></script>
 
+    <script type="text/javascript">
+        var window_h = window.innerHeight;
+        var window_w = window.innerWidth;
+
+        window_w = parseFloat(window.innerWidth / 1366);
+        //$(".logo_set").css("bottom", parseFloat(-20 / window_w).toString() + "%");
+        document.body.style.zoom = window_w;
+    </script>
+
+
+
+
 </head>
 
 <body>
@@ -150,6 +162,7 @@
             ease: Bounce.easeOut
         }, ).to(logo_img, 0.8, {
             bottom: "20%",
+            opacity: 1,
             ease: Power1.easeInOut
         }, ).set(logo_img, {
             "z-index": 1
