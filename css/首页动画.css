@@ -10,8 +10,8 @@
 
 html,
 body {
-    width: 100%;
-    height: 100%;
+    width: 1366px;
+    height: 700px;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -69,10 +69,10 @@ body {
 
 #title1 {
     position: absolute;
-    height: 50px;
     width: 1000px;
-    left: 18%;
-    bottom: 45%;
+    height: 50px;
+    left: 18.5%;
+    bottom: calc(45%);
     z-index: 1;
     font-size: 36px;
     font-weight: 700;
@@ -84,10 +84,10 @@ body {
 
 #title2 {
     position: absolute;
-    height: 50px;
     width: 1000px;
+    height: 50px;
     left: 32.5%;
-    bottom: 30%;
+    bottom: calc(50% - 120px);
     z-index: 1;
     font-size: 36px;
     font-weight: 700;
@@ -122,6 +122,12 @@ body {
     width: 64px;
     height: 64px;
     padding: 0;
+}
+
+.index_sum {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .index_set {
