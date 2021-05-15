@@ -99,9 +99,9 @@ body {
 }
 
 .logo_set {
+    position: absolute;
     left: 5%;
     bottom: -20%;
-    position: absolute;
     z-index: -1;
 }
 
