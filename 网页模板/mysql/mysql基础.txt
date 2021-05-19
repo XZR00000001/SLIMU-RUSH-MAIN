@@ -1,0 +1,365 @@
+CRUD:
+
+R:
+
+                        ----------------------------------第一部分单表查询---------------------------------
+
+1.基本顺序------------------------------------------------------------------------------------------------------------
+
+# 在写SQL命令是注意两点:
+	- 书写顺序
+		- select 字段1, 字段2...
+		- from 表名
+		- where 查询条件
+		
+select * from emp where id > 3 and id < 6;
+
+	- 执行顺序:
+	    - from ---> 找到图书馆
+        - where ---> 找到书的位置
+        - select ---> 找到书本中的某一页
+
+#比如: 图书管理员，得先找到是哪一个图书馆(哪张表),
+#再找这本书在图书馆的哪个位置(哪一条记录), 最后查找这个本书中某一页(哪些字段值);
+           
+# 注意: 执行顺序必须要清楚!!!
+
+查询数据量大时，可以在表后面 + \G，修改显示格式;
+select * from emp\G  # 不要加分号
+
+2.where 约束条件------------------------------------------------------------------------------------------------------------
+
+1.查询id大于等于3小于等于6的数据
+# and: 与
+select * from emp where id>=3 and id <=6;
+# between: 两者之间
+select * from emp where id between 3 and 6;
+
+
+2.查询id小于3或者大于6的数据
+select * from emp where id < 3 or id > 6;
+select * from emp where id not between 3 and 6;
+
+
+3.查询薪资是20000或者18000或者17000的数据
+# or:  或者
+select * from emp where salary=20000 or salary=18000 or salary=17000;
+# in: 在什么里
+select * from emp where salary in (20000, 18000, 17000);
+
+
+4.查询薪资不在20000，18000，17000范围的数据
+select * from emp where salary not in (20000, 18000, 17000);
+
+
+5.查询员工姓名中包含o字母 的 员工姓名和薪资
+# like: 模糊匹配
+# %: 匹配0个或多个任意字符
+# _: 匹配一个任意字符
+select name,salary from emp where name like '%o%';
+
+
+6.查询员工姓名是由四个字符组成的员工姓名与薪资
+select name,salary from emp where name like '____';
+# char_length(字段): 获取字段长度
+select name, salary from emp where char_length(name)=4;
+
+7.查询岗位描述为空的员工名与岗位名 
+# 注意: 针对null不能用等号，只能用is
+select name,post from emp where post_comment = null; #Empty set (0.00 sec)
+select name, post from emp where post_comment is null;
+select name,post from emp where post_comment is not null;
+
+
+3.group by 分组------------------------------------------------------------------------------------------------------------
+
+- 书写顺序:
+		- select 字段1, 字段2...
+		- from 表名
+		- where 查询条件
+        - group by 分组条件
+
+    - 执行顺序:
+        - from
+        - where
+        - group by
+        - select
+
+
+# 严格模式下只能获取分组字段post数据, 无法获取其他字段信息，就好比是进程之间数据隔离，但是可以使用聚合函数来获取
+'''
+    聚合函数:
+        count: 计数
+        max: 最大值
+        min: 最小值
+        avg: 平均值
+        sum: 求和
+
+注意: 聚合函数: 
+	1、只能跟在group by后(执行顺序)使用  
+	2、若查询语句没有group by，则默认整张表就是一个分组。
+'''
+
+# 严格模式设置
+"""
+设置sql_mode为only_full_group_by，意味着以后但凡分组，只能取到分组的依据，
+不应该在去取组里面的单个元素的值，那样的话分组就没有意义了，因为不分组就是对单个元素信息的随意获取
+
+show variables like "%mode%";
+set global sql_mode="strict_trans_tables,only_full_group_by";
+
+"""
+
+1.按部门分组
+select post from emp group by post;
+
+
+2.获取每个部门的最高工资
+select post,max(salary) from emp group by post;
+# as: 起别名; 给获取出来的数据字段名，设置别名
+select post as '部门', max(salary) as '薪资' from emp group by post;
+# 可简写, 但不推荐
+select post '部门', max(salary) '薪资' from emp group by post;
+# 每个部门的最低工资
+select post, min(salary) from emp group by post;
+# 每个部门的平均工资
+select post, avg(salary) from emp group by post;
+# 每个部门的工资总和
+select post, sum(salary) from emp group by post;
+# 每个部门的人数: count() 中传任意参数都没问题
+select post, count(id) from emp group by post;
+select post, count(post) from emp group by post;
+
+
+3.查询分组之后的部门名称和每个部门下所有员工的姓名
+# group_concat(name): 不仅可以获取分组后的某一个字段，并且可以对字符串进行拼接
+select post,group_concat(name) from emp group by post;
+# 给每个部门的员工名字前 + NB_
+select post, group_concat('NB_', name) from emp group by post;
+
+
+4.补充concat（不分组时用）拼接字符串达到更好的显示效果 as语法使用
+select concat('Name: ', name) as '名字', concat('Sal: ', salary) as '薪资' from emp;
+
+
+5.补充as语法 既可以给字段起别名也可以给表起
+select emp.name as '名字', emp.salary as '薪资' from emp;
+
+
+6.求各部门所有员工的年薪
+#查询四则运算
+select name, salary * 12 as annual_salary from emp;
+
+
+7.查询岗位名以及岗位包含的所有员工名字
+select post,group_concat(name)from emp group by post;
+
+
+8.查询公司内男员工和女员工的个数
+select sex, count(id) from emp group by sex;
+
+
+9.统计各部门年龄在30岁以上的员工平均工资
+#思路步骤：先查找所有年龄30岁以上的员工，再根据部门分组查询它们的平均工资;
+select post,avg(salary) from emp where age>30 group by post;
+
+
+4.having 过滤------------------------------------------------------------------------------------------------------------
+
+
+   - 书写顺序:
+        - select
+        - from
+        - where
+        - group by
+        - having
+
+    - 执行顺序:
+        - from
+        - where
+        - group by
+        - having
+        - select
+注意：
+    1.having与where语法一样，只不过having需要在group by后使用;
+    2.where 不能使用聚合函数，但having可以;
+
+1、统计各部门年龄在30岁以上的员工平均工资，并且保留平均工资大于10000的部门;
+select post,avg(salary) from emp where age>30 group by post having avg(salary)>10000;
+
+
+5.distinct去重复------------------------------------------------------------------------------------------------------------
+
+    - 书写顺序:
+        - select
+        - distinct
+        - from
+        - where
+        - group by
+        - having
+
+    - 执行顺序:
+        - from
+        - where
+        - group by
+        - having 过滤的条件
+        - distinct
+        - select
+        
+注意: 查询的字段值必须是重复的才有效，只要有一个字段值是不重复的就没有效果。
+
+1.将重复的部门数据去掉
+select distinct post, id from emp; #id没有重复的，故过滤不掉
+select distinct post from emp;
+
+
+6.order by 排序------------------------------------------------------------------------------------------------------------
+
+ - 书写顺序:
+        - select
+        - from
+        - where
+        - group by
+        - having
+        - order by
+
+    - 执行顺序:
+        - from
+        - where
+        - group by
+        - having
+        - select
+        - order by #通过select获取的数据进行排序
+        
+1、根据薪资进行升序
+select * from emp order by salary;  # 默认升序
+select * from emp order by salary asc;  # 指定升序
+select * from emp order by salary desc;  # 指定降序
+
+
+2、先按照age升序，再按照salary降序
+select * from emp order by age asc, salary desc;
+
+
+3、统计 各部门(分组) 年龄在18岁以上的员工平均工资，并且保留平均工资大于7000的部门，然后对平均工资进行升序
+select post,avg(salary) from emp where age>10 group by post having avg(salary)>7000 order by avg(salary);
+
+7.limit 限制结果返回数量------------------------------------------------------------------------------------------------------------
+
+- 书写顺序:
+        - select
+        - distinct
+        - from
+        - where
+        - group by
+        - having
+        - order by
+        - limit
+
+	执行顺序:
+		- from
+		- where
+		- group by
+		- having
+		- select 
+		- distinct
+		- order by 
+		- limit
+
+1、从第一条开始，获取4条记录;
+select * from emp limit 4;
+
+2、limit可以有两个参数, 参数1是限制的开始位置+1, 参数2是从开始位置展示的条数;
+select * from emp limit 0, 4;
+select * from emp limit 4, 4; # 从第五条数据开始查找，获取4条
+
+
+3、查询工资最高的人的详细信息
+select * from emp order by salary limit 1;
+
+
+8.正则表达式  经典regexp
+
+select * from emp where name regexp '^程.*(金|银|铜|铁)$'；
+
+
+                    ----------------------------------第二部分多表查询---------------------------------
+
+1.多表查询包含 联表查询 和 子查询
+    表数据都存放在硬盘中，存不是目的，目的是为了取，所以我们将数据从硬盘读到内存中，接下来我们应该将他们拼成一张表来查询更加合理。
+这样可以通过一张表查另一张表的数据;
+
+2.联表查询------------------------------------------------------------------------------------------------------------
+
+左表的一条记录与右表的一条记录都对应一遍称之为 --> "笛卡尔积" 
+
+将所有的数据都对应了一遍，虽然不合理但是其中有合理的数据，现在我们需要做的就是找出合理的数据
+
+# 一 比较麻烦的表关联
+1、查询员工以及所在部门的信息;
+# 将两张表合并，并且根据id字段去判断
+select * from emp2, dep2 where emp2.dep_id=dep2.id;
+
+
+2、查询部门为技术部的员工及部门信息
+select * from emp2, dep2 where emp2.dep_id = dep2.id and dep2.name = '技术';
+
+
+#二 将两张表关联到一起的操作，有专门对应的方法
+1、inner join  
+内连接：只取两张表有对应关系的记录
+
+select * from emp2 inner join dep2 on emp2.dep_id = dep2.id;
+select * from emp2 inner join dep2 on emp2.dep_id = dep2.id and dep2.name = '技术';
+
+
+2、left join  
+左连接: 在内连接的基础上保留左表没有对应关系的记录
+
+select * from emp2 left join dep2 on emp2.dep_id = dep2.id;
+
+
+3、right join
+右连接: 在内连接的基础上保留右表没有对应关系的记录
+
+select * from emp2 right join dep2 on emp2.dep_id = dep2.id;
+
+
+4、union
+全连接：在内连接的基础上保留左、右面表没有对应关系的记录
+
+select * from emp2 left join dep2 on emp2.dep_id = dep2.id
+union
+select * from emp2 right join dep2 on emp2.dep_id = dep2.id;
+
+
+
+3.子查询------------------------------------------------------------------------------------------------------------
+
+子查询就是将一个查询语句的结果用括号括起来，当做另一个查询语句的条件去用
+
+1.查询部门是技术或者人力资源的员工信息
+'''
+先获取技术部和人力资源的id号，再去员工表里根据前面的id筛选出符合要求的员工信息;
+'''
+select * from emp2 where dep_id in (select id from dep2 where name='技术' or name='人力资源');
+
+
+2.每个部门最新入职的员工 
+'''
+思路：先查每个部门最新入职的员工，再按部门对应上联表查询
+'''
+
+select t1.id, t1.name, t1.hire_date, t1.post, t2.* from emp as t1 
+inner join 
+(select post, max(hire_date) as max_date from emp group by post) as t2 
+on t1.post = t2.post
+where t1.hire_date = t2.max_date;
+
+
+'''
+as的作用
+	- 可以给表起别名
+	- 可以给查出来的虚拟表起别名
+	- 可以给字段起别名
+'''
